@@ -1,0 +1,90 @@
+openapi: 3.0.0
+info:
+  title: Cadastro de Clientes API
+  version: 1.0.0
+paths:
+  /api/v1/clients:
+    post:
+      summary: Cria um novo cliente
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Cliente criado com sucesso
+          content:
+            application/json:
+              example:
+                id: "bd981cab-d315-4486-85c7-c6af24c475f9"
+                name: "João"
+                email: "joao@autovist.com.br"
+                phone: "11999887766"
+                address:
+                  cep: "01001000"
+                  street: "Praça da Sé"
+                  neighborhood: "Sé"
+                  city: "São Paulo"
+                  state: "SP"
+
+  /api/v1/clients:
+    get:
+      summary: Lista de clientes
+      responses:
+        '200':
+          description: Lista de clientes
+          content:
+            application/json:
+              example:
+                count: 10
+                previous: null
+                next: "http://localhost:8080/api/v1/clients?limit=2&offset=2"
+                results:
+                  - id: "bd981cab-d315-4486-85c7-c6af24c475f9"
+                    name: "João"
+                  - id: "e486af2c-e5da-4a9b-916e-55a41d26e22d"
+                    name: "Maria"
+
+  /api/v1/clients/{clientId}:
+    get:
+      summary: Detalhes de um cliente
+      parameters:
+        - in: path
+          name: clientId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalhes do cliente
+          content:
+            application/json:
+              example:
+                id: "bd981cab-d315-4486-85c7-c6af24c475f9"
+                name: "João"
+                email: "joao@autovist.com.br"
+                phone: "11999887766"
+                address:
+                  cep: "01001000"
+                  street: "Praça da Sé"
+                  neighborhood: "Sé"
+                  city: "São Paulo"
+                  state: "SP"
+
+  /api/v1/clients/{clientId}:
+    delete:
+      summary: Exclusão de um cliente
+      parameters:
+        - in: path
+          name: clientId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cliente excluído com sucesso
+          content:
+            application/json:
+              example:
+                message: "Cliente excluído com sucesso"
